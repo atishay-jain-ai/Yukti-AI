@@ -1,0 +1,346 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+
+    background:linear-gradient(135deg,#0f172a,#172554,#111827);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+
+    overflow:hidden;
+}
+
+.container{
+
+    width:750px;
+
+    height:92vh;
+
+    background:#1e293b;
+
+    border-radius:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.45);
+
+    backdrop-filter:blur(20px);
+}
+
+h1{
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    background:#111827;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+#chat-box{
+
+    flex:1;
+
+    padding:25px;
+
+    overflow-y:auto;
+
+    color:white;
+
+    scroll-behavior:smooth;
+}
+
+.user{
+
+    text-align:right;
+
+    margin:18px 0;
+}
+
+.bot{
+
+    text-align:left;
+
+    margin:18px 0;
+}
+
+.message{
+
+    display:inline-block;
+
+    padding:14px 18px;
+
+    border-radius:18px;
+
+    max-width:75%;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+    word-wrap:break-word;
+
+    animation:fadeIn .25s ease;
+}
+
+.user .message{
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    color:white;
+
+    border-bottom-right-radius:6px;
+
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+}
+
+.bot .message{
+
+    background:#334155;
+
+    color:white;
+
+    border-bottom-left-radius:6px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+.input-area{
+
+    display:flex;
+
+    gap:10px;
+
+    padding:18px;
+
+    background:#111827;
+
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+input{
+
+    flex:1;
+
+    padding:15px 18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#1e293b;
+
+    color:white;
+
+    font-size:16px;
+
+    transition:.25s;
+}
+
+input::placeholder{
+
+    color:#94a3b8;
+}
+
+input:focus{
+
+    box-shadow:0 0 0 2px rgba(59,130,246,.4);
+}
+
+button{
+
+    padding:15px 24px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    transition:.25s;
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+}
+
+button:active{
+
+    transform:scale(.97);
+}
+
+#chat-box::-webkit-scrollbar{
+
+    width:8px;
+}
+
+#chat-box::-webkit-scrollbar-thumb{
+
+    background:#475569;
+
+    border-radius:10px;
+}
+
+#chat-box::-webkit-scrollbar-thumb:hover{
+
+    background:#64748b;
+}
+
+#chat-box::-webkit-scrollbar-track{
+
+    background:transparent;
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+}
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+}
+
+.message pre{
+
+    background:#0f172a;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    overflow-x:auto;
+
+    margin-top:10px;
+}
+
+.message code{
+
+    font-family:Consolas, monospace;
+}
+
+.message h1,
+.message h2,
+.message h3{
+
+    margin:12px 0;
+}
+
+.message ul{
+
+    margin-left:20px;
+}
+
+.message h1,
+.message h2,
+.message h3{
+    margin:14px 0;
+}
+
+.message p{
+    margin:10px 0;
+}
+
+.message ul,
+.message ol{
+    margin-left:22px;
+    margin-top:10px;
+}
+
+.message pre{
+
+    background:#0f172a;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    overflow-x:auto;
+
+    margin-top:12px;
+}
+
+.message code{
+
+    font-family:Consolas, monospace;
+
+    font-size:14px;
+}
+
+.message blockquote{
+
+    border-left:4px solid #3b82f6;
+
+    padding-left:12px;
+
+    margin:12px 0;
+
+    color:#cbd5e1;
+}
+
+button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+}

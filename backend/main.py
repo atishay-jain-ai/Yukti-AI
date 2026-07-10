@@ -1,42 +1,77 @@
-import os
-from pathlib import Path
-
 from fastapi import FastAPI
-from dotenv import load_dotenv
-import google.generativeai as genai
+from fastapi.middleware.cors import CORSMiddleware
 
-# Force load .env from project root
-env_path = Path(__file__).parent.parent / ".env"
+from backend.services.ai_service import ask_ai
 
-loaded = load_dotenv(dotenv_path=env_path)
+SYSTEM_PROMPT = """
+You are Yukti AI.
 
-print("Dotenv loaded:", loaded)
-print("Env path:", env_path)
+Your name is Yukti AI.
 
-API_KEY = os.getenv("GEMINI_API_KEY")
-print("API KEY:", repr(API_KEY))
+You were created by Atishay Jain.
 
-# Configure Gemini
-genai.configure(api_key=API_KEY)
+Never say you are ChatGPT.
+Never say you are Gemini.
+Never mention OpenAI or OpenRouter unless the user specifically asks about the underlying technology.
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+If someone asks:
+- What is your name?
+- Who created you?
+- Who developed you?
+
+Reply naturally:
+
+"My name is Yukti AI. I was created by Atishay Jain."
+
+Be friendly, intelligent and professional.
+
+Use Markdown whenever it makes the response clearer.
+
+If you don't know something, say so honestly instead of making it up.
+"""
 
 app = FastAPI(
     title="Yukti AI",
-    description="Indian AI Voice Assistant",
-    version="1.0.0"
+    description="Indian AI Assistant",
+    version="2.0.0"
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # Development only
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def home():
     return {
-        "message": "Welcome to Yukti AI 🚀"
+        "message": "Welcome to Yukti AI 🚀",
+        "status": "running"
     }
 
+
 @app.get("/ask")
-def ask_ai(prompt: str):
-    response = model.generate_content(prompt)
-    return {
-        "question": prompt,
-        "answer": response.text
-    }
+def chat(prompt: str):
+
+    try:
+
+        answer = ask_ai(
+            system_prompt=SYSTEM_PROMPT,
+            user_prompt=prompt
+        )
+
+        return {
+            "question": prompt,
+            "answer": answer
+        }
+
+    except Exception as e:
+
+        return {
+            "question": prompt,
+            "answer": "❌ Sorry! Yukti AI is currently unavailable.",
+            "error": str(e)
+        }
