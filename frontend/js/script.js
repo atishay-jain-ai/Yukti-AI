@@ -1,107 +1,146 @@
-const input = document.getElementById("prompt");
-const chatBox = document.getElementById("chat-box");
-const sendButton = document.querySelector("button");
+import { askYukti } from "./api.js";
+import { addToConversation } from "./chat.js";
+import { openChat } from "./ui.js";
 
-function scrollToBottom() {
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+const chatContainer = document.getElementById("chatContainer");
+const input = document.getElementById("prompt-input");
+const sendButton = document.getElementById("send-btn");
 
-function renderMarkdown(text) {
-    return marked.parse(text);
-}
-
-function highlightCode(container) {
-    container.querySelectorAll("pre code").forEach((block) => {
-        hljs.highlightElement(block);
-    });
-}
-
-function addMessage(type, text) {
-
-    const wrapper = document.createElement("div");
-    wrapper.className = type;
+function addMessage(text, type = "user") {
 
     const message = document.createElement("div");
-    message.className = "message";
 
-    if (type === "bot") {
-        message.innerHTML = renderMarkdown(text);
-    } else {
-        message.textContent = text;
-    }
+    message.className = `message ${type}`;
 
-    wrapper.appendChild(message);
-    chatBox.appendChild(wrapper);
+    message.innerHTML = `
+    <div class="bubble">
+        ${
+            type === "ai"
+                ? marked.parse(text)
+                : text
+        }
+    </div>
+`;
 
-    if (type === "bot") {
-        highlightCode(wrapper);
-    }
+    chatContainer.appendChild(message);
 
-    scrollToBottom();
+    if (type === "ai") {
 
-    return wrapper;
+    message.querySelectorAll("pre code").forEach((block) => {
+
+        hljs.highlightElement(block);
+
+    });
+
 }
 
-async function askAI() {
+    message.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+    });
+
+}
+
+function showTyping() {
+
+    const typing = document.createElement("div");
+
+    typing.className = "message ai";
+
+    typing.id = "typing";
+
+    typing.innerHTML = `
+        <div class="bubble typing-bubble">
+
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+
+        </div>
+    `;
+
+    chatContainer.appendChild(typing);
+
+    typing.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+    });
+
+}
+
+function hideTyping() {
+
+    document.getElementById("typing")?.remove();
+
+}
+
+async function sendMessage() {
 
     const prompt = input.value.trim();
 
-    if (prompt === "") return;
+    if (!prompt) return;
 
-    addMessage("user", prompt);
+    openChat();
+
+    addMessage(prompt, "user");
+
+    addToConversation("user", prompt);
 
     input.value = "";
+    input.style.height = "auto";
+
+    // Cursor wapas textarea me aa jayega
     input.focus();
 
-    sendButton.disabled = true;
-
-    const thinking = addMessage(
-        "bot",
-        "🤖 **Yukti is thinking...**"
-    );
+    showTyping();
 
     try {
 
-        const response = await fetch(
-            `http://127.0.0.1:8000/ask?prompt=${encodeURIComponent(prompt)}`
-        );
+        const data = await askYukti(prompt);
 
-        if (!response.ok) {
-            throw new Error("Backend Error");
-        }
+        hideTyping();
 
-        const data = await response.json();
+        addMessage(data.answer, "ai");
 
-        thinking.remove();
+        addToConversation("assistant", data.answer);
 
-        addMessage("bot", data.answer);
+    }
 
-    } catch (err) {
+    catch (err) {
 
-        thinking.remove();
+        hideTyping();
 
         addMessage(
-            "bot",
-            "❌ **Connection Failed**\n\nPlease make sure the FastAPI backend is running."
+            "❌ Unable to connect to Yukti AI.",
+            "ai"
         );
 
         console.error(err);
 
-    } finally {
-
-        sendButton.disabled = false;
-
-        input.focus();
-
     }
+
 }
 
-input.addEventListener("keydown", function (e) {
+sendButton.addEventListener("click", sendMessage);
 
-    if (e.key === "Enter") {
+input.addEventListener("keydown", (e) => {
 
-        askAI();
+    if (e.key === "Enter" && !e.shiftKey) {
+
+        e.preventDefault();
+
+        sendMessage();
 
     }
+
+});
+
+// ================= Auto Grow Textarea =================
+
+input.addEventListener("input", () => {
+
+    input.style.height = "auto";
+
+    input.style.height = input.scrollHeight + "px";
 
 });

@@ -1,42 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Yukti AI</title>
 
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
+    <!-- ================= Sidebar ================= -->
 
-    <h1>🤖 Yukti AI</h1>
+<aside class="sidebar">
 
-    <div id="chat-box"></div>
+    <div class="logo">
 
-    <div class="input-area">
+        <div class="logo-icon">
+            🤖
+        </div>
 
-        <input
-            type="text"
-            id="prompt"
-            placeholder="Ask Yukti anything..."
-        >
-
-        <button onclick="askAI()">
-            Send
-        </button>
+        <div class="logo-text">
+            Yukti AI
+        </div>
 
     </div>
+
+    <button id="new-chat" class="new-chat">
+        <i class="ri-add-line"></i>
+        New Chat
+    </button>
+
+    <nav class="menu">
+
+        <a href="#" class="active">
+            <i class="ri-home-5-line"></i>
+            Home
+        </a>
+
+        <a href="#">
+            <i class="ri-chat-3-line"></i>
+            Chats
+        </a>
+
+        <a href="#">
+            <i class="ri-folder-line"></i>
+            Projects
+        </a>
+
+        <a href="#">
+            <i class="ri-file-list-3-line"></i>
+            Files
+        </a>
+
+        <a href="#">
+            <i class="ri-brain-line"></i>
+            Knowledge
+        </a>
+
+        <a href="#">
+            <i class="ri-robot-2-line"></i>
+            Agents
+        </a>
+
+        <a href="#">
+            <i class="ri-mic-line"></i>
+            Voice
+        </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <img
+        src="https://ui-avatars.com/api/?name=Atishay+Jain&background=6C63FF&color=fff"
+        alt="avatar">
+
+        <div>
+
+            <h4>Atishay Jain</h4>
+
+            <p>Developer</p>
+
+        </div>
+
+    </div>
+
+</aside>
+
+<!-- ================= Main ================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="top-left">
+
+            <h2>Good Morning 👋</h2>
+
+            <p>Welcome back to Yukti AI</p>
+
+        </div>
+
+    </header>
+
+    <section class="hero" id="hero">
+
+    <div class="orb"></div>
+
+    <h1>Hello, Atishay 👋</h1>
+
+    <p>
+        I'm <span>Yukti AI</span>.<br>
+        Your intelligent AI assistant built to help you code, learn,
+        research and create faster.
+    </p>
+
+</section>
+
+    
+<section class="feature-grid" id="featureGrid">
+    
+    <div class="feature-card">
+        <div class="feature-icon code">
+            <i class="ri-code-box-line"></i>
+        </div>
+
+        <h3>Code</h3>
+
+        <p>
+            Write, debug and explain code with AI.
+        </p>
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon research">
+            <i class="ri-search-eye-line"></i>
+        </div>
+
+        <h3>Research</h3>
+
+        <p>
+            Deep research with AI.
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon image">
+            <i class="ri-image-line"></i>
+        </div>
+
+        <h3>Image</h3>
+
+        <p>
+            Generate stunning AI images.
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon doc">
+            <i class="ri-file-text-line"></i>
+        </div>
+
+        <h3>Documents</h3>
+
+        <p>
+            Read and summarize PDFs instantly.
+        </p>
+
+    </div>
+
+    <div class="feature-card">
+
+        <div class="feature-icon voice">
+            <i class="ri-mic-line"></i>
+        </div>
+
+        <h3>Voice</h3>
+
+        <p>
+            Talk naturally with Yukti AI.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="chat-page" id="chatPage">
+
+    <div class="chat-container" id="chatContainer">
+
+    </div>
+
+</section>
+
+<section class="prompt-section" id="promptSection">
+
+    <div class="prompt-box">
+
+        <textarea
+             id="prompt-input"
+            placeholder="Ask Yukti anything..."
+            rows="2"></textarea>
+
+        <div class="prompt-actions">
+
+            <div class="left-actions">
+
+                <button class="action-btn">
+                    📎 Attach
+                </button>
+
+                <button class="action-btn">
+                    🌐 Web Search
+                </button>
+
+                <button class="action-btn">
+                    🧠 Think
+                </button>
+
+            </div>
+
+            <div class="right-actions">
+
+                <button class="icon-btn">
+                    🎤
+                </button>
+
+                <button id="send-btn" class="send-btn">
+                    ➜
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+</main>
 
 </div>
 
@@ -44,7 +272,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 
-<script src="js/script.js"></script>
+<script type="module" src="js/script.js"></script>
 
 </body>
+
 </html>
