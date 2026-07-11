@@ -1,39 +1,4 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
 
-:root{
-
-    --bg:#090B18;
-    --sidebar:#0F172A;
-    --card:#111827;
-
-    --primary:#6C63FF;
-    --primary2:#8B5CF6;
-
-    --text:#ffffff;
-    --gray:#94A3B8;
-
-    --border:rgba(255,255,255,.08);
-
-}
-
-body{
-
-    background:linear-gradient(135deg,#090B18,#111827,#1E1B4B);
-
-    color:var(--text);
-
-    height:100vh;
-
-    overflow-y:auto;
-    overflow-x:hidden;
-    
-
-}
 
 .app{
 
@@ -228,8 +193,10 @@ body{
     display:flex;
     flex-direction:column;
     position:relative;
-    overflow-y:auto;
-    padding-bottom:180px;
+
+    height:100vh;
+
+    overflow:hidden;
 }
 
 .topbar{
@@ -761,7 +728,11 @@ body{
 
     display:none;
 
-    width:100%;
+    flex:1;
+
+    overflow:hidden;
+
+    padding:0;
 
 }
 
@@ -772,12 +743,18 @@ body{
 
     margin:0 auto;
 
+    height:100%;
+
+    overflow-y:auto;
+
     display:flex;
     flex-direction:column;
 
     gap:24px;
 
-    padding-bottom:220px;
+    padding:40px 0 220px 0;
+
+    scroll-behavior:smooth;
 
 }
 
@@ -899,5 +876,49 @@ body{
         opacity:1;
 
     }
+
+}
+
+/* ================= Copy Button ================= */
+
+pre{
+
+    position:relative;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+}
+
+.copy-btn{
+
+    position:absolute;
+
+    top:12px;
+
+    right:12px;
+
+    border:none;
+
+    background:#2A3248;
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    transition:.25s;
+
+}
+
+.copy-btn:hover{
+
+    background:#6C63FF;
 
 }

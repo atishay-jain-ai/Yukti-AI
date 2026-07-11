@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+import asyncio
 
 from backend.services.ai_service import ask_ai
 
@@ -75,3 +77,27 @@ def chat(prompt: str):
             "answer": "❌ Sorry! Yukti AI is currently unavailable.",
             "error": str(e)
         }
+
+@app.get("/stream")
+async def stream(prompt: str):
+
+    completion = ask_ai(
+        system_prompt=SYSTEM_PROMPT,
+        user_prompt=prompt
+    )
+
+    async def generator():
+
+        for chunk in completion:
+
+            if (
+                chunk.choices
+                and chunk.choices[0].delta.content
+            ):
+
+                yield chunk.choices[0].delta.content
+
+    return StreamingResponse(
+        generator(),
+        media_type="text/plain"
+    )      

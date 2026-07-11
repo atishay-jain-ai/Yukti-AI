@@ -32,12 +32,66 @@ function addMessage(text, type = "user") {
 
     });
 
+    addCopyButtons(message);
+
 }
 
     message.scrollIntoView({
         behavior: "smooth",
         block: "end"
     });
+
+}
+
+function addCopyButtons(container) {
+
+    container.querySelectorAll("pre").forEach((pre) => {
+
+        const button = document.createElement("button");
+
+        button.className = "copy-btn";
+
+        button.innerText = "📋 Copy";
+
+        button.onclick = async () => {
+
+            const code = pre.querySelector("code").innerText;
+
+            await navigator.clipboard.writeText(code);
+
+            button.innerText = "✅ Copied";
+
+            setTimeout(() => {
+
+                button.innerText = "📋 Copy";
+
+            }, 2000);
+
+        };
+
+        pre.style.position = "relative";
+
+        pre.appendChild(button);
+
+    });
+
+}
+
+function createStreamingMessage() {
+
+    const message = document.createElement("div");
+
+    message.className = "message ai";
+
+    const bubble = document.createElement("div");
+
+    bubble.className = "bubble";
+
+    message.appendChild(bubble);
+
+    chatContainer.appendChild(message);
+
+    return { message, bubble };
 
 }
 
@@ -94,17 +148,36 @@ async function sendMessage() {
 
     showTyping();
 
-    try {
+try {
 
-        const data = await askYukti(prompt);
+    hideTyping();
 
-        hideTyping();
+    const { message, bubble } = createStreamingMessage();
 
-        addMessage(data.answer, "ai");
+    let fullResponse = "";
 
-        addToConversation("assistant", data.answer);
+    await askYukti(prompt, (chunk) => {
 
-    }
+        fullResponse += chunk;
+
+        bubble.innerHTML = marked.parse(fullResponse);
+
+        bubble.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+        });
+
+        message.scrollIntoView({
+            behavior: "smooth",
+            block: "end"
+        });
+
+    });
+
+    addCopyButtons(message);
+
+    addToConversation("assistant", fullResponse);
+
+}
 
     catch (err) {
 
