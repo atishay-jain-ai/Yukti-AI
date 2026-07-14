@@ -58,7 +58,7 @@
 
     box-sizing:border-box;
 
-    scroll-behavior:smooth;
+    scroll-behavior:auto;
 
 }
 

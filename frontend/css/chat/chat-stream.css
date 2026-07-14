@@ -52,6 +52,15 @@
 
 }
 
+/* ==========================================
+   Smooth Streaming
+========================================== */
+
+.bubble.streaming {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
 
 /* ==================================================
    End of Typing Indicator

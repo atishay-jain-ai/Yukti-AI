@@ -13,31 +13,115 @@ import {
     setCurrentMessageElement
 } from "./chat-session-state.js";
 
+import {
+    queueStreamContent,
+    startWordStream,
+    stopWordStream,
+    waitForWordStream
+} from "./chat-stream-animation.js";
 
-/* ================= Scroll ================= */
+/* ================= Stream State ================= */
 
-export function scrollChatToBottom(
-    smooth = true
-) {
+let pendingStreamContent = "";
+let scrollAnimationFrame = null;
+
+
+/* ================= Smooth Scroll ================= */
+
+function animateChatScroll() {
     if (!chatContainer) {
+        scrollAnimationFrame = null;
         return;
     }
 
-    requestAnimationFrame(() => {
-        chatContainer.scrollTo({
-            top: chatContainer.scrollHeight,
-            behavior: smooth
-                ? "smooth"
-                : "auto"
-        });
-    });
+    const targetScroll =
+        chatContainer.scrollHeight -
+        chatContainer.clientHeight;
+
+    const currentScroll =
+        chatContainer.scrollTop;
+
+    const distance =
+        targetScroll - currentScroll;
+
+    if (Math.abs(distance) <= 1) {
+        chatContainer.scrollTop =
+            targetScroll;
+
+        scrollAnimationFrame = null;
+        return;
+    }
+
+    const direction =
+        Math.sign(distance);
+
+    const scrollStep =
+        Math.min(
+            Math.max(
+                Math.abs(distance) * 0.14,
+                1
+            ),
+            18
+        );
+
+    chatContainer.scrollTop =
+        currentScroll +
+        direction * scrollStep;
+
+    scrollAnimationFrame =
+        requestAnimationFrame(
+            animateChatScroll
+        );
+}
+
+
+/* ================= Scroll ================= */
+
+export function scrollChatToBottom() {
+    if (
+        !chatContainer ||
+        scrollAnimationFrame
+    ) {
+        return;
+    }
+
+    scrollAnimationFrame =
+        requestAnimationFrame(
+            animateChatScroll
+        );
+}
+
+
+/* ================= Message Data ================= */
+
+function getMessageData(message) {
+    if (
+        message &&
+        typeof message === "object"
+    ) {
+        return {
+            id: message.id || null,
+            content: String(
+                message.content || ""
+            ),
+            feedback:
+                message.feedback || null
+        };
+    }
+
+    return {
+        id: null,
+        content: String(message || ""),
+        feedback: null
+    };
 }
 
 
 /* ================= Message Element ================= */
 
 function createMessageElement(
-    messageType
+    messageType,
+    messageId = null
 ) {
     if (!chatContainer) {
         return null;
@@ -49,13 +133,28 @@ function createMessageElement(
     messageElement.className =
         `message ${messageType}`;
 
+    if (messageId) {
+        messageElement.dataset.messageId =
+            messageId;
+    }
+
+    const messageContent =
+        document.createElement("div");
+
+    messageContent.className =
+        "message-content";
+
     const bubbleElement =
         document.createElement("div");
 
     bubbleElement.className = "bubble";
 
-    messageElement.appendChild(
+    messageContent.appendChild(
         bubbleElement
+    );
+
+    messageElement.appendChild(
+        messageContent
     );
 
     chatContainer.appendChild(
@@ -74,6 +173,7 @@ function createMessageElement(
 
     return {
         messageElement,
+        messageContent,
         bubbleElement
     };
 }
@@ -84,17 +184,21 @@ function createMessageElement(
 export function renderUserMessage(
     message
 ) {
+    const messageData =
+        getMessageData(message);
+
     const messageElements =
-        createMessageElement("user");
+        createMessageElement(
+            "user",
+            messageData.id
+        );
 
     if (!messageElements) {
         return null;
     }
 
     messageElements.bubbleElement.textContent =
-        String(message);
-
-    scrollChatToBottom();
+        messageData.content;
 
     return messageElements.bubbleElement;
 }
@@ -105,8 +209,14 @@ export function renderUserMessage(
 export function renderAssistantMessage(
     message
 ) {
+    const messageData =
+        getMessageData(message);
+
     const messageElements =
-        createMessageElement("ai");
+        createMessageElement(
+            "ai",
+            messageData.id
+        );
 
     if (!messageElements) {
         return null;
@@ -114,12 +224,20 @@ export function renderAssistantMessage(
 
     renderMarkdown(
         messageElements.bubbleElement,
-        String(message)
+        messageData.content,
+        true
     );
 
     addCodeCopyButtons(
         messageElements.messageElement
     );
+
+    if (messageData.id) {
+        addMessageActions(
+            messageElements.messageContent,
+            messageData
+        );
+    }
 
     scrollChatToBottom(false);
 
@@ -172,11 +290,20 @@ export function prepareAssistantStream() {
         return false;
     }
 
+    pendingStreamContent = "";
+
     currentBubbleElement.classList.remove(
         "typing-bubble"
     );
 
-    currentBubbleElement.innerHTML = "";
+    currentBubbleElement.classList.add(
+        "streaming"
+    );
+
+    startWordStream(
+        currentBubbleElement,
+        scrollChatToBottom
+    );
 
     return true;
 }
@@ -191,25 +318,60 @@ export function renderAssistantStream(
         return;
     }
 
-    renderMarkdown(
-        currentBubbleElement,
-        completeResponse
+    pendingStreamContent =
+        String(completeResponse || "");
+
+    queueStreamContent(
+        pendingStreamContent
     );
-
-    scrollChatToBottom();
 }
-
 
 /* ================= Complete Stream ================= */
 
-export function completeAssistantStream() {
-    if (!currentMessageElement) {
+export async function completeAssistantStream(
+    assistantMessage = null
+) {
+    if (
+        !currentMessageElement ||
+        !currentBubbleElement
+    ) {
         return;
     }
+
+    await waitForWordStream();
+
+    stopWordStream();
+
+    renderMarkdown(
+        currentBubbleElement,
+        pendingStreamContent,
+        true
+    );
+
+    currentBubbleElement.classList.remove(
+        "streaming"
+    );
 
     addCodeCopyButtons(
         currentMessageElement
     );
+
+    if (assistantMessage?.id) {
+        currentMessageElement.dataset.messageId =
+            assistantMessage.id;
+
+        const messageContent =
+            currentMessageElement.querySelector(
+                ".message-content"
+            );
+
+        addMessageActions(
+            messageContent,
+            assistantMessage
+        );
+    }
+
+    pendingStreamContent = "";
 
     scrollChatToBottom();
 }
@@ -224,8 +386,12 @@ export function renderStreamError(
         return;
     }
 
+    stopWordStream();
+    pendingStreamContent = "";
+
     currentBubbleElement.classList.remove(
-        "typing-bubble"
+        "typing-bubble",
+        "streaming"
     );
 
     currentBubbleElement.textContent =
@@ -234,12 +400,121 @@ export function renderStreamError(
     scrollChatToBottom();
 }
 
+/* ================= Message Actions ================= */
+
+function addMessageActions(
+    messageContent,
+    message
+) {
+    if (!messageContent) {
+        return;
+    }
+
+    const oldActions =
+        messageContent.querySelector(
+            ".message-actions"
+        );
+
+    if (oldActions) {
+        oldActions.remove();
+    }
+
+    const actionsContainer =
+        document.createElement("div");
+
+    actionsContainer.className =
+        "message-actions";
+
+    actionsContainer.dataset.messageId =
+        message.id;
+
+    actionsContainer.append(
+        createActionButton(
+            "like",
+            "ri-thumb-up-line",
+            "Like response",
+            message.feedback === "like"
+        ),
+
+        createActionButton(
+            "dislike",
+            "ri-thumb-down-line",
+            "Dislike response",
+            message.feedback === "dislike"
+        ),
+
+        createActionButton(
+            "share",
+            "ri-share-forward-line",
+            "Share response"
+        ),
+
+        createActionButton(
+            "split",
+            "ri-git-branch-line",
+            "Split into new chat"
+        )
+    );
+
+    messageContent.appendChild(
+        actionsContainer
+    );
+}
+
+
+/* ================= Action Button ================= */
+
+function createActionButton(
+    action,
+    iconClass,
+    label,
+    isActive = false
+) {
+    const button =
+        document.createElement("button");
+
+    button.type = "button";
+
+    button.className =
+        "message-action-button";
+
+    button.dataset.action =
+        action;
+
+    button.setAttribute(
+        "aria-label",
+        label
+    );
+
+    button.setAttribute(
+        "title",
+        label
+    );
+
+    if (isActive) {
+        button.classList.add(
+            "active"
+        );
+    }
+
+    const icon =
+        document.createElement("i");
+
+    icon.className =
+        iconClass;
+
+    button.appendChild(icon);
+
+    return button;
+}
+
 
 /* ================= Markdown ================= */
 
 function renderMarkdown(
     container,
-    content
+    content,
+    highlight = false
 ) {
     if (
         window.marked &&
@@ -252,9 +527,9 @@ function renderMarkdown(
             content;
     }
 
-    highlightCodeBlocks(
-        container
-    );
+    if (highlight) {
+        highlightCodeBlocks(container);
+    }
 }
 
 
@@ -280,7 +555,7 @@ function highlightCodeBlocks(
 }
 
 
-/* ================= Copy Buttons ================= */
+/* ================= Code Copy Buttons ================= */
 
 function addCodeCopyButtons(
     messageElement
@@ -288,17 +563,16 @@ function addCodeCopyButtons(
     messageElement
         .querySelectorAll("pre")
         .forEach(codeContainer => {
-            const oldButton =
+            if (
                 codeContainer.querySelector(
                     ".copy-btn"
-                );
-
-            if (oldButton) {
+                )
+            ) {
                 return;
             }
 
             const copyButton =
-                createCopyButton(
+                createCodeCopyButton(
                     codeContainer
                 );
 
@@ -312,9 +586,33 @@ function addCodeCopyButtons(
 }
 
 
-/* ================= Copy Button ================= */
+/* ================= Copy Button Content ================= */
 
-function createCopyButton(
+function setCopyButtonContent(
+    copyButton,
+    iconClass,
+    label
+) {
+    const icon =
+        document.createElement("i");
+
+    icon.className = iconClass;
+
+    const text =
+        document.createElement("span");
+
+    text.textContent = label;
+
+    copyButton.replaceChildren(
+        icon,
+        text
+    );
+}
+
+
+/* ================= Code Copy Button ================= */
+
+function createCodeCopyButton(
     codeContainer
 ) {
     const copyButton =
@@ -322,7 +620,22 @@ function createCopyButton(
 
     copyButton.type = "button";
     copyButton.className = "copy-btn";
-    copyButton.textContent = "📋 Copy";
+
+    copyButton.setAttribute(
+        "aria-label",
+        "Copy code"
+    );
+
+    copyButton.setAttribute(
+        "title",
+        "Copy code"
+    );
+
+    setCopyButtonContent(
+        copyButton,
+        "ri-file-copy-line",
+        "Copy"
+    );
 
     copyButton.addEventListener(
         "click",
@@ -341,21 +654,55 @@ function createCopyButton(
                     codeElement.innerText
                 );
 
-                copyButton.textContent =
-                    "✅ Copied";
+                copyButton.classList.add(
+                    "copied"
+                );
+
+                setCopyButtonContent(
+                    copyButton,
+                    "ri-check-line",
+                    "Copied"
+                );
 
                 setTimeout(() => {
-                    copyButton.textContent =
-                        "📋 Copy";
-                }, 2000);
+                    copyButton.classList.remove(
+                        "copied"
+                    );
+
+                    setCopyButtonContent(
+                        copyButton,
+                        "ri-file-copy-line",
+                        "Copy"
+                    );
+                }, 1800);
+
             } catch (error) {
                 console.error(
                     "Yukti AI: Code copy nahi hua.",
                     error
                 );
 
-                copyButton.textContent =
-                    "❌ Failed";
+                copyButton.classList.add(
+                    "copy-failed"
+                );
+
+                setCopyButtonContent(
+                    copyButton,
+                    "ri-error-warning-line",
+                    "Failed"
+                );
+
+                setTimeout(() => {
+                    copyButton.classList.remove(
+                        "copy-failed"
+                    );
+
+                    setCopyButtonContent(
+                        copyButton,
+                        "ri-file-copy-line",
+                        "Copy"
+                    );
+                }, 1800);
             }
         }
     );
@@ -370,6 +717,9 @@ export function clearRenderedMessages() {
     if (!chatContainer) {
         return;
     }
+
+    stopWordStream();
+    pendingStreamContent = "";
 
     chatContainer.innerHTML = "";
 }

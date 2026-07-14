@@ -3,11 +3,13 @@
 ========================================================= */
 
 import {
-    getActiveChat
+    getActiveChat,
+    updateActiveChatMessages
 } from "../history/history-service.js";
 
 import {
     clearCurrentConversation,
+    currentConversation,
     setCurrentConversation
 } from "./chat-session-state.js";
 
@@ -38,14 +40,14 @@ function renderConversation(
     messages.forEach(message => {
         if (message.role === "assistant") {
             renderAssistantMessage(
-                message.content
+                message
             );
 
             return;
         }
 
         renderUserMessage(
-            message.content
+            message
         );
     });
 }
@@ -65,17 +67,21 @@ export function loadActiveChat() {
         return;
     }
 
-    const messages =
+    const savedMessages =
         Array.isArray(activeChat.messages)
             ? activeChat.messages
             : [];
 
     setCurrentConversation(
-        messages
+        savedMessages
+    );
+
+    updateActiveChatMessages(
+        currentConversation
     );
 
     renderConversation(
-        messages
+        currentConversation
     );
 
     openChatPage();

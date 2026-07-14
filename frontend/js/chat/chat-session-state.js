@@ -20,6 +20,47 @@ export let currentMessageElement = null;
 export let currentBubbleElement = null;
 
 
+/* ================= Message ID ================= */
+
+function generateMessageId() {
+    if (
+        typeof crypto !== "undefined" &&
+        typeof crypto.randomUUID === "function"
+    ) {
+        return crypto.randomUUID();
+    }
+
+    return `message-${Date.now()}-${Math.random()
+        .toString(16)
+        .slice(2)}`;
+}
+
+
+/* ================= Normalize Message ================= */
+
+function normalizeMessage(message) {
+    return {
+        id:
+            message.id ||
+            generateMessageId(),
+
+        role:
+            message.role,
+
+        content:
+            String(message.content || ""),
+
+        time:
+            message.time ||
+            Date.now(),
+
+        feedback:
+            message.feedback ||
+            null
+    };
+}
+
+
 /* ================= Add Message ================= */
 
 export function addConversationMessage(
@@ -39,14 +80,12 @@ export function addConversationMessage(
         return null;
     }
 
-    const cleanContent =
-        String(content);
-
-    const message = {
+    const message = normalizeMessage({
         role,
-        content: cleanContent,
-        time: Date.now()
-    };
+        content,
+        time: Date.now(),
+        feedback: null
+    });
 
     currentConversation.push(
         message
@@ -71,10 +110,79 @@ export function setCurrentConversation(
 
     currentConversation =
         messages.map(
-            message => ({ ...message })
+            normalizeMessage
         );
 
     return true;
+}
+
+
+/* ================= Get Message ================= */
+
+export function getConversationMessage(
+    messageId
+) {
+    return currentConversation.find(
+        message =>
+            message.id === messageId
+    ) || null;
+}
+
+
+/* ================= Update Feedback ================= */
+
+export function updateMessageFeedback(
+    messageId,
+    feedback
+) {
+    const allowedFeedback = [
+        "like",
+        "dislike",
+        null
+    ];
+
+    if (!allowedFeedback.includes(feedback)) {
+        return false;
+    }
+
+    const message =
+        getConversationMessage(
+            messageId
+        );
+
+    if (!message) {
+        return false;
+    }
+
+    message.feedback = feedback;
+
+    return true;
+}
+
+
+/* ================= Conversation Branch ================= */
+
+export function getConversationBranch(
+    messageId
+) {
+    const messageIndex =
+        currentConversation.findIndex(
+            message =>
+                message.id === messageId
+        );
+
+    if (messageIndex === -1) {
+        return [];
+    }
+
+    return currentConversation
+        .slice(
+            0,
+            messageIndex + 1
+        )
+        .map(
+            message => ({ ...message })
+        );
 }
 
 

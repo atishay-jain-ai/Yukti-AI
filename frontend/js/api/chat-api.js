@@ -12,18 +12,52 @@ const STREAM_ENDPOINT =
     "/stream";
 
 
+/* ================= Prepare Messages ================= */
+
+function prepareMessages(
+    messages
+) {
+    if (!Array.isArray(messages)) {
+        return [];
+    }
+
+    return messages
+        .filter(message => {
+            return (
+                message &&
+                (
+                    message.role === "user" ||
+                    message.role === "assistant"
+                ) &&
+                String(message.content).trim()
+            );
+        })
+        .map(message => {
+            return {
+                role: message.role,
+                content:
+                    String(
+                        message.content
+                    ).trim()
+            };
+        });
+}
+
+
 /* ================= Stream Request ================= */
 
 export async function streamChatResponse(
-    prompt,
+    messages,
     onChunk
 ) {
-    const cleanPrompt =
-        String(prompt).trim();
+    const conversation =
+        prepareMessages(
+            messages
+        );
 
-    if (!cleanPrompt) {
+    if (conversation.length === 0) {
         throw new Error(
-            "Prompt empty nahi ho sakta."
+            "Conversation empty nahi ho sakti."
         );
     }
 
@@ -38,17 +72,29 @@ export async function streamChatResponse(
         API_BASE_URL
     );
 
-    requestUrl.searchParams.set(
-        "prompt",
-        cleanPrompt
-    );
-
     const response = await fetch(
-        requestUrl
+        requestUrl,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body: JSON.stringify({
+                messages:
+                    conversation
+            })
+        }
     );
 
     if (!response.ok) {
+        const errorMessage =
+            await response.text();
+
         throw new Error(
+            errorMessage ||
             `Backend request failed: ${response.status}`
         );
     }
@@ -91,12 +137,13 @@ async function readResponseStream(
                 break;
             }
 
-            const chunk = decoder.decode(
-                value,
-                {
-                    stream: true
-                }
-            );
+            const chunk =
+                decoder.decode(
+                    value,
+                    {
+                        stream: true
+                    }
+                );
 
             if (!chunk) {
                 continue;
@@ -114,7 +161,8 @@ async function readResponseStream(
             decoder.decode();
 
         if (finalChunk) {
-            completeResponse += finalChunk;
+            completeResponse +=
+                finalChunk;
 
             onChunk(
                 finalChunk,

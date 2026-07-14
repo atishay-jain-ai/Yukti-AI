@@ -11,6 +11,10 @@ import {
 } from "../history/history-events.js";
 
 import {
+    initializeChatBranchService
+} from "../history/chat-branch-service.js";
+
+import {
     initializeChatLoader
 } from "../chat/chat-loader.js";
 
@@ -21,6 +25,10 @@ import {
 import {
     initializeChatEvents
 } from "../chat/chat-events.js";
+
+import {
+    initializeMessageActions
+} from "../chat/message-actions.js";
 
 import {
     initializeHistoryToggle
@@ -47,15 +55,23 @@ export function initializeApplication() {
     /* ================= Chat History ================= */
 
     renderChatHistory();
+
     initializeHistoryEvents();
+
     initializeHistoryToggle();
+
+    initializeChatBranchService();
 
 
     /* ================= Chat System ================= */
 
     initializeChatLoader();
+
     initializeNewChat();
+
     initializeChatEvents();
+
+    initializeMessageActions();
 
 
     /* ================= Prompt Input ================= */

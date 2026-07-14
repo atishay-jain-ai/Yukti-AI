@@ -1,103 +1,125 @@
+"""
+=========================================================
+Yukti AI — FastAPI Application
+=========================================================
+"""
+
+import logging
+from collections.abc import Iterator
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
-import asyncio
 
-from backend.services.ai_service import ask_ai
+from backend.brain import AllProvidersFailedError, brain
+from backend.models.chat_models import ChatRequest
+from backend.providers import ProviderError
 
-SYSTEM_PROMPT = """
-You are Yukti AI.
 
-Your name is Yukti AI.
+# ================= Logging =================
 
-You were created by Atishay Jain.
+logging.basicConfig(
+    level=logging.INFO,
+    format=(
+        "%(asctime)s | %(levelname)s | "
+        "%(name)s | %(message)s"
+    ),
+)
 
-Never say you are ChatGPT.
-Never say you are Gemini.
-Never mention OpenAI or OpenRouter unless the user specifically asks about the underlying technology.
+logger = logging.getLogger("yukti.api")
 
-If someone asks:
-- What is your name?
-- Who created you?
-- Who developed you?
 
-Reply naturally:
-
-"My name is Yukti AI. I was created by Atishay Jain."
-
-Be friendly, intelligent and professional.
-
-Use Markdown whenever it makes the response clearer.
-
-If you don't know something, say so honestly instead of making it up.
-"""
+# ================= FastAPI App =================
 
 app = FastAPI(
     title="Yukti AI",
-    description="Indian AI Assistant",
-    version="2.0.0"
+    description="Intelligent Indian AI Assistant",
+    version="3.0.0",
 )
+
+
+# ================= CORS =================
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],      # Development only
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+# ================= Health Route =================
+
 @app.get("/")
-def home():
+def home() -> dict[str, str]:
     return {
         "message": "Welcome to Yukti AI 🚀",
-        "status": "running"
+        "status": "running",
+        "version": "3.0.0",
     }
 
 
-@app.get("/ask")
-def chat(prompt: str):
+# ================= Stream Generator =================
 
+def generate_response(
+    conversation: list[dict],
+) -> Iterator[str]:
     try:
+        yield from brain.stream_chat(conversation)
 
-        answer = ask_ai(
-            system_prompt=SYSTEM_PROMPT,
-            user_prompt=prompt
+    except AllProvidersFailedError as error:
+        logger.error(
+            "All providers failed attempts=%s",
+            error.attempted_providers,
         )
 
-        return {
-            "question": prompt,
-            "answer": answer
-        }
+        yield (
+            "Yukti AI is temporarily unavailable. "
+            "Please try again shortly."
+        )
 
-    except Exception as e:
+    except ProviderError as error:
+        logger.error(
+            "Provider stream failed provider=%s "
+            "status=%s error=%s",
+            error.provider,
+            error.status_code,
+            error.__class__.__name__,
+        )
 
-        return {
-            "question": prompt,
-            "answer": "❌ Sorry! Yukti AI is currently unavailable.",
-            "error": str(e)
-        }
+        yield (
+            "The response was interrupted. "
+            "Please send your message again."
+        )
 
-@app.get("/stream")
-async def stream(prompt: str):
+    except Exception:
+        logger.exception(
+            "Unexpected chat stream failure"
+        )
 
-    completion = ask_ai(
-        system_prompt=SYSTEM_PROMPT,
-        user_prompt=prompt
-    )
+        yield (
+            "Something went wrong while generating "
+            "the response. Please try again."
+        )
 
-    async def generator():
 
-        for chunk in completion:
+# ================= Stream Chat =================
 
-            if (
-                chunk.choices
-                and chunk.choices[0].delta.content
-            ):
-
-                yield chunk.choices[0].delta.content
+@app.post("/stream")
+def stream_chat(
+    request: ChatRequest,
+) -> StreamingResponse:
+    conversation = [
+        message.model_dump()
+        for message in request.messages
+    ]
 
     return StreamingResponse(
-        generator(),
-        media_type="text/plain"
-    )      
+        generate_response(conversation),
+        media_type="text/plain; charset=utf-8",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Content-Type-Options": "nosniff",
+        },
+    )

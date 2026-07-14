@@ -1,0 +1,290 @@
+/* =========================================================
+   Yukti AI — Message Actions
+========================================================= */
+
+
+/* ================= Message Content ================= */
+
+.message-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    max-width: 75%;
+
+}
+
+
+.message.user .message-content {
+
+    align-items: flex-end;
+
+}
+
+
+.message.ai .message-content {
+
+    align-items: flex-start;
+
+}
+
+
+.message-content .bubble {
+
+    max-width: 100%;
+
+}
+
+
+/* ================= Action Toolbar ================= */
+
+.message-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 9px;
+
+    padding: 5px 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(19, 25, 39, 0.86),
+            rgba(24, 31, 47, 0.68)
+        );
+
+    border: 1px solid
+        rgba(96, 165, 250, 0.12);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.18),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.04);
+
+    backdrop-filter: blur(16px);
+
+    opacity: 0.65;
+
+    transform:
+        translateY(-2px);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+/* ================= Toolbar Hover ================= */
+
+.message.ai:hover .message-actions,
+.message-actions:focus-within {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    border-color:
+        rgba(96, 165, 250, 0.24);
+
+    box-shadow:
+        0 10px 28px
+        rgba(0, 0, 0, 0.24),
+        0 0 18px
+        rgba(59, 130, 246, 0.08);
+
+}
+
+
+/* ================= Action Button ================= */
+
+.message-action-button {
+
+    position: relative;
+
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid transparent;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #8F9BB3;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+/* ================= Button Hover ================= */
+
+.message-action-button:hover {
+
+    color: #EAF2FF;
+
+    background:
+        rgba(59, 130, 246, 0.12);
+
+    border-color:
+        rgba(96, 165, 250, 0.25);
+
+    box-shadow:
+        0 0 14px
+        rgba(59, 130, 246, 0.16);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* ================= Button Focus ================= */
+
+.message-action-button:focus-visible {
+
+    outline: 2px solid #38BDF8;
+
+    outline-offset: 2px;
+
+}
+
+
+/* ================= Like Active ================= */
+
+.message-action-button[data-action="like"].active {
+
+    color: #7DD3FC;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56, 189, 248, 0.2),
+            rgba(59, 130, 246, 0.16)
+        );
+
+    border-color:
+        rgba(56, 189, 248, 0.48);
+
+    box-shadow:
+        0 0 12px
+        rgba(56, 189, 248, 0.32),
+        inset 0 0 10px
+        rgba(59, 130, 246, 0.1);
+
+}
+
+
+/* ================= Dislike Active ================= */
+
+.message-action-button[data-action="dislike"].active {
+
+    color: #F9A8D4;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(236, 72, 153, 0.18),
+            rgba(139, 92, 246, 0.14)
+        );
+
+    border-color:
+        rgba(244, 114, 182, 0.42);
+
+    box-shadow:
+        0 0 12px
+        rgba(236, 72, 153, 0.26),
+        inset 0 0 10px
+        rgba(139, 92, 246, 0.1);
+
+}
+
+
+/* ================= Share Success ================= */
+
+.message-action-button.success {
+
+    color: #86EFAC;
+
+    background:
+        rgba(34, 197, 94, 0.16);
+
+    border-color:
+        rgba(74, 222, 128, 0.4);
+
+    box-shadow:
+        0 0 14px
+        rgba(34, 197, 94, 0.28);
+
+}
+
+
+/* ================= Split Button ================= */
+
+.message-action-button[data-action="split"]:hover {
+
+    color: #C4B5FD;
+
+    background:
+        rgba(139, 92, 246, 0.16);
+
+    border-color:
+        rgba(167, 139, 250, 0.38);
+
+    box-shadow:
+        0 0 14px
+        rgba(139, 92, 246, 0.24);
+
+}
+
+
+/* ================= Mobile Toolbar ================= */
+
+@media (max-width: 700px) {
+
+    .message-content {
+
+        max-width: 88%;
+
+    }
+
+    .message-actions {
+
+        opacity: 1;
+
+    }
+
+    .message-action-button {
+
+        width: 36px;
+        height: 36px;
+
+    }
+
+}

@@ -70,13 +70,14 @@ export async function sendChatMessage() {
 
     /* ================= User Message ================= */
 
-    renderUserMessage(
-        prompt
-    );
+    const userMessage =
+        addConversationMessage(
+            "user",
+            prompt
+        );
 
-    addConversationMessage(
-        "user",
-        prompt
+    renderUserMessage(
+        userMessage
     );
 
     updateActiveChatTitle(
@@ -101,7 +102,7 @@ export async function sendChatMessage() {
     try {
         const completeResponse =
             await streamChatResponse(
-                prompt,
+                currentConversation,
                 (
                     chunk,
                     streamedResponse
@@ -121,11 +122,14 @@ export async function sendChatMessage() {
 
         /* ================= Assistant Message ================= */
 
-        completeAssistantStream();
+        const assistantMessage =
+            addConversationMessage(
+                "assistant",
+                completeResponse
+            );
 
-        addConversationMessage(
-            "assistant",
-            completeResponse
+        await completeAssistantStream(
+        assistantMessage
         );
 
         updateActiveChatMessages(

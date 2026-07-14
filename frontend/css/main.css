@@ -55,7 +55,9 @@
 /* ================= Chat ================= */
 
 @import url("chat/chat.css");
+@import url("chat/chat-scrollbar.css");
 @import url("chat/chat-message.css");
+@import url("chat/message-actions.css");
 @import url("chat/chat-stream.css");
 @import url("chat/chat-popup.css");
 @import url("chat/chat-toolbar.css");
@@ -68,6 +70,7 @@
 
 @import url("prompt/prompt.css");
 @import url("prompt/prompt-textarea.css");
+@import url("prompt/prompt-scrollbar.css");
 @import url("prompt/prompt-toolbar.css");
 @import url("prompt/prompt-send.css");
 @import url("prompt/prompt-warning.css");

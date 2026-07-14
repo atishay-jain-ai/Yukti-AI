@@ -7,3 +7,253 @@
    Reserved for Future Development
 
 ================================================== */
+
+/* =========================================================
+   Yukti AI — Chat Code
+========================================================= */
+
+
+/* ================= Code Block ================= */
+
+.message.ai .bubble pre {
+    position: relative;
+    overflow: auto;
+
+    margin: 18px 0;
+    padding: 54px 20px 20px;
+
+    border: 1px solid rgba(126, 103, 255, 0.2);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 17, 29, 0.98),
+            rgba(8, 12, 22, 0.98)
+        );
+
+    box-shadow:
+        0 14px 34px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+
+/* ================= Code Glow ================= */
+
+.message.ai .bubble pre::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(139, 92, 246, 0.7),
+        rgba(56, 189, 248, 0.65),
+        transparent
+    );
+}
+
+
+/* ================= Code Content ================= */
+
+.message.ai .bubble pre code {
+    display: block;
+
+    padding: 0;
+
+    color: #dce7ff;
+    background: transparent;
+
+    font-family:
+        "Fira Code",
+        "Cascadia Code",
+        Consolas,
+        monospace;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    white-space: pre;
+}
+
+
+/* ================= Copy Button ================= */
+
+.message.ai .bubble .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-width: 84px;
+    height: 32px;
+    padding: 0 12px;
+
+    border: 1px solid rgba(139, 92, 246, 0.32);
+    border-radius: 9px;
+
+    color: #cbd5e1;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(30, 41, 59, 0.96),
+            rgba(15, 23, 42, 0.96)
+        );
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ================= Copy Icon ================= */
+
+.message.ai .bubble .copy-btn i {
+    font-size: 15px;
+}
+
+
+/* ================= Copy Hover ================= */
+
+.message.ai .bubble .copy-btn:hover {
+    color: #ffffff;
+
+    border-color: rgba(139, 92, 246, 0.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(109, 74, 255, 0.34),
+            rgba(37, 99, 235, 0.24)
+        );
+
+    box-shadow:
+        0 10px 24px rgba(76, 81, 255, 0.22),
+        0 0 18px rgba(139, 92, 246, 0.12);
+
+    transform: translateY(-1px);
+}
+
+
+/* ================= Copy Active ================= */
+
+.message.ai .bubble .copy-btn:active {
+    transform: translateY(0) scale(0.97);
+}
+
+
+/* ================= Copy Focus ================= */
+
+.message.ai .bubble .copy-btn:focus-visible {
+    outline: 2px solid rgba(96, 165, 250, 0.9);
+    outline-offset: 2px;
+}
+
+
+/* ================= Copied State ================= */
+
+.message.ai .bubble .copy-btn.copied {
+    color: #b7f7d0;
+    border-color: rgba(34, 197, 94, 0.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(22, 101, 52, 0.42),
+            rgba(6, 78, 59, 0.42)
+        );
+
+    box-shadow:
+        0 8px 22px rgba(34, 197, 94, 0.16);
+}
+
+
+/* ================= Failed State ================= */
+
+.message.ai .bubble .copy-btn.copy-failed {
+    color: #fecaca;
+    border-color: rgba(239, 68, 68, 0.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(127, 29, 29, 0.42),
+            rgba(69, 10, 10, 0.42)
+        );
+}
+
+
+/* ================= Code Scrollbar ================= */
+
+.message.ai .bubble pre {
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(79, 124, 255, 0.85)
+        rgba(15, 23, 42, 0.5);
+}
+
+.message.ai .bubble pre::-webkit-scrollbar {
+    height: 7px;
+    width: 7px;
+}
+
+.message.ai .bubble pre::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 999px;
+}
+
+.message.ai .bubble pre::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+
+    background: linear-gradient(
+        90deg,
+        #695cff,
+        #3182f6
+    );
+}
+
+
+/* ================= Mobile ================= */
+
+@media (max-width: 640px) {
+    .message.ai .bubble pre {
+        padding:
+            52px
+            16px
+            16px;
+
+        border-radius: 13px;
+    }
+
+    .message.ai .bubble pre code {
+        font-size: 13px;
+    }
+
+    .message.ai .bubble .copy-btn {
+        right: 10px;
+    }
+}

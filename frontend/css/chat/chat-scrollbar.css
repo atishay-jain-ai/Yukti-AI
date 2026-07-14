@@ -1,0 +1,144 @@
+/* =========================================================
+   Yukti AI — Chat Scrollbar
+========================================================= */
+
+
+/* ================= Chat Scroll Area ================= */
+
+.chat-page {
+
+    overflow: visible;
+
+}
+
+
+.chat-container {
+
+    width: calc(100% + 22px);
+
+    margin-right: -22px;
+
+    padding-right:
+        max(
+            54px,
+            calc((100% - 900px) / 2 + 22px)
+        );
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #3B82F6
+        rgba(13, 23, 45, 0.42);
+
+    scrollbar-gutter: stable;
+
+}
+
+
+/* ================= Scrollbar Size ================= */
+
+.chat-container::-webkit-scrollbar {
+
+    width: 9px;
+
+}
+
+
+/* ================= Scrollbar Track ================= */
+
+.chat-container::-webkit-scrollbar-track {
+
+    margin-top: 12px;
+    margin-bottom: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15, 31, 61, 0.18),
+            rgba(15, 31, 61, 0.48)
+        );
+
+    border: 1px solid
+        rgba(59, 130, 246, 0.1);
+
+    border-radius: 999px;
+
+}
+
+
+/* ================= Scrollbar Thumb ================= */
+
+.chat-container::-webkit-scrollbar-thumb {
+
+    min-height: 70px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #38BDF8 0%,
+            #3B82F6 45%,
+            #6C63FF 100%
+        );
+
+    border: 2px solid
+        rgba(13, 17, 36, 0.7);
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 0 9px
+        rgba(59, 130, 246, 0.7),
+        0 0 18px
+        rgba(108, 99, 255, 0.3);
+
+}
+
+
+/* ================= Scrollbar Hover ================= */
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+
+    background:
+        linear-gradient(
+            180deg,
+            #7DD3FC 0%,
+            #3B82F6 42%,
+            #8B5CF6 100%
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(56, 189, 248, 0.85),
+        0 0 22px
+        rgba(108, 99, 255, 0.45);
+
+}
+
+
+/* ================= Scrollbar Buttons ================= */
+
+.chat-container::-webkit-scrollbar-button {
+
+    display: none;
+
+    width: 0;
+    height: 0;
+
+}
+
+
+/* ================= Responsive Scrollbar ================= */
+
+@media (max-width: 900px) {
+
+    .chat-container {
+
+        width: calc(100% + 12px);
+
+        margin-right: -12px;
+
+        padding-right: 34px;
+
+    }
+
+}
