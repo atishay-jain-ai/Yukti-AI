@@ -1,0 +1,78 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Developer Card
+   File      : developer-card.css
+   Version   : 0.1
+
+   Description:
+   Sidebar developer profile card shown at the bottom.
+
+================================================== */
+
+
+/* ==========================================
+   Developer Card Container
+========================================== */
+
+.sidebar-footer {
+
+    margin-top: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 16px 0 14px;
+
+    border-top: 1px solid rgba(255,255,255,.08);
+
+    flex-shrink: 0;
+
+}
+
+
+/* ==========================================
+   Developer Avatar
+========================================== */
+
+.sidebar-footer img {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+}
+
+
+/* ==========================================
+   Developer Name
+========================================== */
+
+.sidebar-footer h4 {
+
+    font-size: 15px;
+
+}
+
+
+/* ==========================================
+   Developer Role
+========================================== */
+
+.sidebar-footer p {
+
+    color: var(--gray);
+
+    font-size: 13px;
+
+}
+
+
+/* ==================================================
+   End of Developer Card
+================================================== */

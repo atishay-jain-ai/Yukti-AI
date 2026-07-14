@@ -1,0 +1,58 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Hero Layout
+   File      : hero.css
+================================================== */
+
+
+/* ==========================================
+   Hero Section
+========================================== */
+
+.hero{
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:flex-start;
+
+    position:relative;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    padding-top:20px;
+
+}
+
+
+/* ==========================================
+   Home Screen
+========================================== */
+
+#homeScreen{
+
+    display:flex;
+
+    flex-direction:column;
+
+    width:100%;
+
+    transition:
+        opacity .45s ease,
+        transform .45s ease;
+
+}
+
+#homeScreen.hide{
+
+    opacity:0;
+
+    transform:translateY(-25px);
+
+    pointer-events:none;
+
+}

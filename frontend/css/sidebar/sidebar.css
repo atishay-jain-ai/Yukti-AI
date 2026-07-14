@@ -1,0 +1,71 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Sidebar Layout
+   File      : sidebar.css
+   Version   : 0.1
+
+   Description:
+   Main sidebar layout and structure.
+
+================================================== */
+
+
+/* ==========================================
+   Sidebar Container
+========================================== */
+
+.sidebar {
+
+    width: 280px;
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px;
+
+    background: rgba(9,12,22,.82);
+
+    backdrop-filter: blur(30px);
+
+    border-right: 1px solid rgba(255,255,255,.05);
+
+}
+
+
+/* ==========================================
+   Sidebar Top
+========================================== */
+
+.sidebar-top {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 0;
+
+}
+
+
+/* ==========================================
+   Sidebar Middle
+========================================== */
+
+.sidebar-middle {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-top: 4px;
+
+}
+
+
+/* ==================================================
+   End of Sidebar Layout
+================================================== */

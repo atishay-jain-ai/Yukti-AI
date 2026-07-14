@@ -1,0 +1,322 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Sidebar History
+   File      : sidebar-history.css
+   Version   : 0.1
+
+   Description:
+   Recent chats section including:
+   - History container
+   - History header
+   - Toggle button
+   - Chat items
+   - Collapse animation
+   - Divider
+
+================================================== */
+
+
+/* ==========================================
+   History Container
+========================================== */
+
+.chat-history {
+
+    margin-top: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-height: 0;
+
+    flex: 1;
+
+}
+
+
+/* ==========================================
+   History Header
+========================================== */
+
+.history-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 14px;
+
+    margin-bottom: 8px;
+
+}
+
+.history-title {
+
+    padding: 0 14px;
+
+    margin-bottom: 12px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #8B93A7;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ==========================================
+   History Toggle Button
+========================================== */
+
+.history-toggle {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: none;
+
+    border: none;
+
+    color: #B8C1D9;
+
+    cursor: pointer;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    transition: .25s;
+
+}
+
+.history-toggle:hover {
+
+    color: #fff;
+
+}
+
+.history-toggle span {
+
+    flex: 1;
+
+    text-align: left;
+
+    margin-left: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    text-transform: uppercase;
+
+}
+
+.history-toggle i {
+
+    transition: .3s;
+
+}
+
+.history-toggle:hover i {
+
+    color: #8B5CF6;
+
+}
+
+
+/* ==========================================
+   Collapse Animation
+========================================== */
+
+.history-collapse {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    transition: max-height .35s ease;
+
+}
+
+.history-collapse.show {
+
+    max-height: 320px;
+
+    overflow-y: auto;
+
+}
+
+.history-collapse.show #chat-history-list {
+
+    padding-bottom: 8px;
+
+}
+
+
+/* ==========================================
+   Chat History List
+========================================== */
+
+#chat-history-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+/* ==========================================
+   Chat Item
+========================================== */
+
+.chat-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+    color: #D7DCE7;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+}
+
+.chat-item:hover {
+
+    background: rgba(255,255,255,.07);
+
+    transform: translateX(3px);
+
+}
+
+.chat-item.active {
+
+    background: linear-gradient(
+        90deg,
+        rgba(108,99,255,.22),
+        rgba(108,99,255,.08)
+    );
+
+    border-left: 3px solid #7B6CFF;
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   Chat Title
+========================================== */
+
+.chat-title {
+
+    flex: 1;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* ==========================================
+   Chat Menu
+========================================== */
+
+.chat-menu {
+
+    width: 28px;
+
+    height: 28px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #8B93A7;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    transition: .25s;
+
+}
+
+.chat-item:hover .chat-menu {
+
+    opacity: 1;
+
+}
+
+.chat-menu:hover {
+
+    background: rgba(255,255,255,.08);
+
+    color: white;
+
+}
+
+
+/* ==========================================
+   Sidebar Divider
+========================================== */
+
+.sidebar-divider {
+
+    border: none;
+
+    height: 1px;
+
+    margin: 8px 0 10px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        rgba(108,99,255,.45),
+        rgba(255,255,255,.18),
+        transparent
+    );
+
+}
+
+
+/* ==================================================
+   End of Sidebar History
+================================================== */

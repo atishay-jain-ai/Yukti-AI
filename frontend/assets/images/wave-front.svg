@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240" preserveAspectRatio="none">
+
+    <!-- ================= Front Wave Effects ================= -->
+
+    <defs>
+        <linearGradient id="frontWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+
+            <stop offset="0%" stop-color="#6C63FF" stop-opacity="0"></stop>
+
+            <stop offset="15%" stop-color="#6C63FF" stop-opacity="1"></stop>
+
+            <stop offset="42%" stop-color="#A78BFA" stop-opacity="1"></stop>
+
+            <stop offset="68%" stop-color="#885CE6" stop-opacity="1"></stop>
+
+            <stop offset="88%" stop-color="#3B82F6" stop-opacity="1"></stop>
+
+            <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"></stop>
+
+        </linearGradient>
+
+        <filter id="frontWaveGlow" x="-20%" y="-120%" width="140%" height="340%">
+
+            <feGaussianBlur stdDeviation="4" result="softGlow"></feGaussianBlur>
+
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="innerGlow"></feGaussianBlur>
+
+            <feMerge>
+                <feMergeNode in="softGlow"></feMergeNode>
+                <feMergeNode in="innerGlow"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+
+        </filter>
+    </defs>
+
+    <!-- ================= Front Wave Area ================= -->
+
+    <path d="
+            M0 232
+            C125 220, 220 190, 345 194
+            C490 198, 605 230, 745 220
+            C900 208, 1015 160, 1160 168
+            C1280 174, 1360 205, 1440 214
+            L1440 240
+            L0 240
+            Z
+        " fill="#6C63FF" fill-opacity="0.16"></path>
+
+    <!-- ================= Front Wave Line ================= -->
+
+    <path d="
+            M0 232
+            C125 220, 220 190, 345 194
+            C490 198, 605 230, 745 220
+            C900 208, 1015 160, 1160 168
+            C1280 174, 1360 205, 1440 214
+        " fill="none" stroke="url(#frontWaveGradient)" stroke-width="4" stroke-linecap="round" filter="url(#frontWaveGlow)"></path>
+
+    <!-- ================= Front Highlight ================= -->
+
+    <path d="
+            M90 226
+            C200 208, 275 196, 365 199
+            C500 204, 610 228, 735 220
+        " fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-opacity="0.45"></path>
+
+</svg>

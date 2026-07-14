@@ -1,0 +1,96 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Chat Messages
+   File      : chat-message.css
+
+================================================== */
+
+
+/* ==========================================
+   Message Wrapper
+========================================== */
+
+.message{
+
+    display:flex;
+
+    width:100%;
+
+    padding:0 12px;
+
+    box-sizing:border-box;
+
+}
+
+.message.user{
+
+    justify-content:flex-end;
+
+}
+
+.message.ai{
+
+    justify-content:flex-start;
+
+}
+
+
+/* ==========================================
+   Chat Bubble
+========================================== */
+
+.bubble{
+
+    max-width:75%;
+
+    padding:16px 20px;
+
+    border-radius:22px;
+
+    line-height:1.7;
+
+    font-size:16px;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+
+}
+
+
+/* ==========================================
+   User Bubble
+========================================== */
+
+.message.user .bubble{
+
+    background:linear-gradient(135deg,#6C63FF,#8B5CF6);
+
+    color:#fff;
+
+    border-bottom-right-radius:8px;
+
+}
+
+
+/* ==========================================
+   AI Bubble
+========================================== */
+
+.message.ai .bubble{
+
+    background:#181F2F;
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-bottom-left-radius:8px;
+
+}
+
+
+/* ==================================================
+   End of Messages
+================================================== */

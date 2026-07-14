@@ -1,0 +1,34 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Global Variables
+   File      : variables.css
+================================================== */
+
+:root{
+
+    /* Colors */
+
+    --bg:#090B18;
+
+    --sidebar:#0F172A;
+
+    --card:#111827;
+
+    /* Primary */
+
+    --primary:#6C63FF;
+
+    --primary2:#8B5CF6;
+
+    /* Text */
+
+    --text:#FFFFFF;
+
+    --gray:#94A3B8;
+
+    /* Border */
+
+    --border:rgba(255,255,255,.08);
+
+}

@@ -1,0 +1,29 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Hero Description
+   File      : hero-description.css
+================================================== */
+
+
+/* ==========================================
+   Hero Description
+========================================== */
+
+.hero p{
+
+    max-width:700px;
+
+    margin-top:22px;
+
+    margin-bottom:0;
+
+    font-size:21px;
+
+    line-height:1.75;
+
+    color:#AAB3C5;
+
+    font-weight:400;
+
+}

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240" preserveAspectRatio="none">
+
+    <!-- ================= Middle Wave Effects ================= -->
+
+    <defs>
+        <linearGradient id="middleWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+
+            <stop offset="0%" stop-color="#6C63FF" stop-opacity="0"></stop>
+
+            <stop offset="18%" stop-color="#6C63FF" stop-opacity="0.9"></stop>
+
+            <stop offset="48%" stop-color="#A78BFA" stop-opacity="1"></stop>
+
+            <stop offset="72%" stop-color="#885CE6" stop-opacity="0.95"></stop>
+
+            <stop offset="92%" stop-color="#3B82F6" stop-opacity="0.8"></stop>
+
+            <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"></stop>
+
+        </linearGradient>
+
+        <filter id="middleWaveGlow" x="-20%" y="-100%" width="140%" height="300%">
+
+            <feGaussianBlur stdDeviation="5" result="blur"></feGaussianBlur>
+
+            <feMerge>
+                <feMergeNode in="blur"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+
+        </filter>
+    </defs>
+
+    <!-- ================= Middle Wave Area ================= -->
+
+    <path d="
+            M0 220
+            C135 205, 245 155, 390 165
+            C545 176, 640 220, 790 204
+            C955 186, 1080 125, 1225 140
+            C1320 150, 1380 175, 1440 188
+            L1440 240
+            L0 240
+            Z
+        " fill="#885CE6" fill-opacity="0.12"></path>
+
+    <!-- ================= Middle Wave Line ================= -->
+
+    <path d="
+            M0 220
+            C135 205, 245 155, 390 165
+            C545 176, 640 220, 790 204
+            C955 186, 1080 125, 1225 140
+            C1320 150, 1380 175, 1440 188
+        " fill="none" stroke="url(#middleWaveGradient)" stroke-width="3.5" stroke-linecap="round" filter="url(#middleWaveGlow)"></path>
+
+</svg>

@@ -4,26 +4,68 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Yukti AI</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- ================= Yukti AI Favicons ================= -->
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="./assets/logo/fevicon/favicon.ico">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="./assets/logo/fevicon/favicon-32.png">
 
-    <!-- Remix Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="./assets/logo/fevicon/favicon-16.png">
 
-    <!-- Highlight.js -->
-    <link rel="stylesheet"
+    <link
+        rel="apple-touch-icon"
+        href="./assets/logo/fevicon/apple-touch-icon.png">
+
+    <!-- ================= Google Font ================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- ================= Remix Icons ================= -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+        rel="stylesheet">
+
+    <!-- ================= Highlight.js ================= -->
+
+    <link
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/main.css">
+    <!-- ================= Main CSS ================= -->
+
+    <link
+        rel="stylesheet"
+        href="css/main.css">
 
 </head>
 
@@ -34,10 +76,12 @@
 
 <aside class="sidebar">
 
+    <div class="sidebar-top">
+
     <div class="logo">
 
         <div class="logo-icon">
-            🤖
+            <img src="assets/logo/png/yukti-logo.png" alt="Yukti Logo">
         </div>
 
         <div class="logo-text">
@@ -47,20 +91,21 @@
     </div>
 
     <button id="new-chat" class="new-chat">
-        <i class="ri-add-line"></i>
-        New Chat
+    <i class="ri-add-line"></i>
+    New Chat
     </button>
+
+    <hr class="sidebar-divider">
+
+    </div>
+
+<div class="sidebar-middle">
 
     <nav class="menu">
 
         <a href="#" class="active">
-            <i class="ri-home-5-line"></i>
-            Home
-        </a>
-
-        <a href="#">
-            <i class="ri-chat-3-line"></i>
-            Chats
+        <i class="ri-home-5-line"></i>
+        Home
         </a>
 
         <a href="#">
@@ -83,12 +128,31 @@
             Agents
         </a>
 
-        <a href="#">
-            <i class="ri-mic-line"></i>
-            Voice
-        </a>
-
     </nav>
+
+    <div class="chat-history">
+
+    <div class="history-header">
+
+        <button id="toggle-history" class="history-toggle">
+
+            <i class="ri-arrow-down-s-line"></i>
+
+            <span>Recent Chats</span>
+
+        </button>
+
+    </div>
+
+    <div id="chat-history-wrapper" class="history-collapse show">
+
+        <div id="chat-history-list"></div>
+
+    </div>
+
+</div>
+
+</div>
 
     <div class="sidebar-footer">
 
@@ -112,157 +176,157 @@
 
 <main class="main">
 
-    <header class="topbar">
+    <!-- ================= Header ================= -->
 
-        <div class="top-left">
+    <header class="topbar" id="topbar">
 
-            <h2>Good Morning 👋</h2>
+    <div class="top-left">
 
-            <p>Welcome back to Yukti AI</p>
+        <p class="welcome-text">
+            Welcome to Yukti AI
+        </p>
 
-        </div>
+    </div>
 
     </header>
 
-    <section class="hero" id="hero">
+    <!-- ================= Scroll Area ================= -->
 
-    <div class="orb"></div>
+    <div class="content-wrapper">
 
-    <h1>Hello, Atishay 👋</h1>
+        <div id="homeScreen">
 
-    <p>
-        I'm <span>Yukti AI</span>.<br>
-        Your intelligent AI assistant built to help you code, learn,
-        research and create faster.
-    </p>
+        <!--====================== Hero =============================-->
 
-</section>
+        <section class="hero" id="hero">
 
-    
-<section class="feature-grid" id="featureGrid">
-    
-    <div class="feature-card">
-        <div class="feature-icon code">
-            <i class="ri-code-box-line"></i>
+            <div class="hero-bg"></div>
+
+            <div class="hero-logo">
+                <img
+                    src="assets/logo/png/yukti-logo.png"
+                    alt="Yukti AI Logo">
+            </div>
+
+            <h1>Hello, Atishay 👋</h1>
+
+            <div class="hero-badge">
+
+                <i class="ri-sparkling-2-line"></i>
+
+                Powered by Yukti Intelligence
+
+            </div>
+
+            <p>
+                Your intelligent AI assistant, available for anything.
+            </p>
+
+        </section>
+
+        <!-- Feature Cards -->
+
+        <section class="feature-grid" id="featureGrid">
+
+            <div class="feature-card">
+                <i class="ri-code-s-slash-line feature-icon"></i>
+                <h3>Code</h3>
+                <p>Write and debug code with AI assistance</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="ri-search-line feature-icon"></i>
+                <h3>Research</h3>
+                <p>Find information and insights across the web</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="ri-image-line feature-icon"></i>
+                <h3>Image</h3>
+                <p>Generate and edit images with AI</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="ri-file-list-3-line feature-icon"></i>
+                <h3>Documents</h3>
+                <p>Create and edit documents with AI</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="ri-mic-line feature-icon"></i>
+                <h3>Voice</h3>
+                <p>Convert speech to text and vice versa</p>
+            </div>
+
+        </section>
+
         </div>
 
-        <h3>Code</h3>
+        <!-- Chat -->
 
-        <p>
-            Write, debug and explain code with AI.
-        </p>
-    </div>
+        <section class="chat-page" id="chatPage">
 
-    <div class="feature-card">
+            <div
+                class="chat-container"
+                id="chatContainer">
+            </div>
 
-        <div class="feature-icon research">
-            <i class="ri-search-eye-line"></i>
-        </div>
-
-        <h3>Research</h3>
-
-        <p>
-            Deep research with AI.
-        </p>
+        </section>
 
     </div>
 
-    <div class="feature-card">
+    <!--bottom-wave-->
 
-        <div class="feature-icon image">
-            <i class="ri-image-line"></i>
-        </div>
+    <div class="bottom-waves">
+        
 
-        <h3>Image</h3>
+    <img
+        class="wave-back"
+        src="assets/images/wave-back.svg"
+        alt="">
 
-        <p>
-            Generate stunning AI images.
-        </p>
+    <img
+        class="wave-middle"
+        src="assets/images/wave-middle.svg"
+        alt="">
 
-    </div>
-
-    <div class="feature-card">
-
-        <div class="feature-icon doc">
-            <i class="ri-file-text-line"></i>
-        </div>
-
-        <h3>Documents</h3>
-
-        <p>
-            Read and summarize PDFs instantly.
-        </p>
+    <img
+        class="wave-front"
+        src="assets/images/wave-front.svg"
+        alt="">
 
     </div>
 
-    <div class="feature-card">
+    <!-- Prompt -->
 
-        <div class="feature-icon voice">
-            <i class="ri-mic-line"></i>
-        </div>
-
-        <h3>Voice</h3>
-
-        <p>
-            Talk naturally with Yukti AI.
-        </p>
-
-    </div>
-
-</section>
-
-<section class="chat-page" id="chatPage">
-
-    <div class="chat-container" id="chatContainer">
-
-    </div>
-
-</section>
-
-<section class="prompt-section" id="promptSection">
+    <section class="prompt-section" id="promptSection">
 
     <div class="prompt-box">
 
-        <textarea
-             id="prompt-input"
-            placeholder="Ask Yukti anything..."
-            rows="2"></textarea>
+    <button id="more-btn" class="circle-btn">
+        <i class="ri-add-line"></i>
+    </button>
 
-        <div class="prompt-actions">
+    <textarea
+        id="prompt-input"
+        rows="1"
+        placeholder="Ask Yukti anything..."></textarea>
 
-            <div class="left-actions">
+    <button class="circle-btn">
+        <i class="ri-mic-line"></i>
+    </button>
 
-                <button class="action-btn">
-                    📎 Attach
-                </button>
-
-                <button class="action-btn">
-                    🌐 Web Search
-                </button>
-
-                <button class="action-btn">
-                    🧠 Think
-                </button>
-
-            </div>
-
-            <div class="right-actions">
-
-                <button class="icon-btn">
-                    🎤
-                </button>
-
-                <button id="send-btn" class="send-btn">
-                    ➜
-                </button>
-
-            </div>
-
-        </div>
+    <button id="send-btn" class="send-btn">
+        <i class="ri-arrow-up-line"></i>
+    </button>
 
     </div>
-</section>
 
+    <p class="ai-warning">
+        Yukti can make mistakes. Please verify important information.
+    </p>
+
+</section>
 
 </main>
 
@@ -272,8 +336,89 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 
-<script type="module" src="js/script.js"></script>
+<script type="module" src="js/main.js"></script>
+
+<div class="modal" id="renameModal">
+
+    <div class="modal-box">
+
+        <h3>Rename Chat</h3>
+
+        <input
+        id="renameInput"
+        type="text"
+        placeholder="Chat name">
+
+        <div class="modal-actions">
+
+            <button id="cancelRename">
+                Cancel
+            </button>
+
+            <button id="saveRename">
+                Save
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal" id="deleteModal">
+
+    <div class="modal-box">
+
+        <h3>Delete Chat?</h3>
+
+        <p>
+
+            This action cannot be undone.
+
+        </p>
+
+        <div class="modal-actions">
+
+            <button id="cancelDelete">
+
+                Cancel
+
+            </button>
+
+            <button id="confirmDelete">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="chatContextMenu" class="context-menu">
+
+<button id="renameChat">
+
+<i class="ri-edit-line"></i>
+
+Rename
+
+</button>
+
+<button id="deleteChat">
+
+<i class="ri-delete-bin-line"></i>
+
+Delete
+
+</button>
+
+</div>
 
 </body>
+
+
 
 </html>

@@ -1,0 +1,55 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Sidebar Scrollbar
+   File      : sidebar-scrollbar.css
+   Version   : 0.1
+
+   Description:
+   Custom scrollbar for chat history section.
+
+================================================== */
+
+
+/* ==========================================
+   History Scrollbar
+========================================== */
+
+.history-collapse::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+.history-collapse::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+.history-collapse::-webkit-scrollbar-thumb {
+
+    background: linear-gradient(
+        180deg,
+        #6C63FF,
+        #4F8DFF
+    );
+
+    border-radius: 20px;
+
+}
+
+.history-collapse::-webkit-scrollbar-thumb:hover {
+
+    background: linear-gradient(
+        180deg,
+        #8B5CF6,
+        #6C63FF
+    );
+
+}
+
+
+/* ==================================================
+   End of Sidebar Scrollbar
+================================================== */

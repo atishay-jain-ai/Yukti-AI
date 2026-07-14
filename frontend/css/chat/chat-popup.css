@@ -1,0 +1,83 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Chat Popup Menu
+   File      : chat-popup.css
+
+================================================== */
+
+
+/* ==========================================
+   Popup Container
+========================================== */
+
+.chat-popup{
+
+    position:fixed;
+
+    display:none;
+
+    flex-direction:column;
+
+    min-width:180px;
+
+    background:#151A28;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.45);
+
+    z-index:9999;
+
+}
+
+
+/* ==========================================
+   Popup Buttons
+========================================== */
+
+.chat-popup button{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px 18px;
+
+    border:none;
+
+    background:none;
+
+    color:#E6E9F2;
+
+    cursor:pointer;
+
+}
+
+.chat-popup button:hover{
+
+    background:rgba(255,255,255,.06);
+
+}
+
+
+/* ==========================================
+   Delete Button
+========================================== */
+
+#delete-chat{
+
+    color:#ff7b7b;
+
+}
+
+
+/* ==================================================
+   End of Chat Popup
+================================================== */

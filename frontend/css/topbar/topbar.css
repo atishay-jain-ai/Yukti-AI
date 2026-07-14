@@ -1,0 +1,31 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Topbar Layout
+   File      : topbar.css
+================================================== */
+
+
+/* ==========================================
+   Topbar Layout
+========================================== */
+
+.topbar{
+
+    height:64px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    background:transparent;
+
+    border:none;
+
+    box-shadow:none;
+
+    backdrop-filter:none;
+
+}

@@ -1,0 +1,59 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Prompt Toolbar
+   File      : prompt-toolbar.css
+
+================================================== */
+
+
+/* ==========================================
+   Toolbar
+========================================== */
+
+.prompt-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:16px;
+
+}
+
+
+/* ==========================================
+   Circle Button
+========================================== */
+
+.circle-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1B2335;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:20px;
+
+    transition:.25s;
+
+}
+
+.circle-btn:hover{
+
+    background:#27324B;
+
+    transform:scale(1.08);
+
+}

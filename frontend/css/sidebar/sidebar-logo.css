@@ -1,0 +1,86 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Sidebar Logo
+   File      : sidebar-logo.css
+   Version   : 0.1
+
+   Description:
+   Sidebar branding.
+
+================================================== */
+
+
+/* ==========================================
+   Logo Container
+========================================== */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 35px;
+
+}
+
+
+/* ==========================================
+   Logo Icon
+========================================== */
+
+.logo-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 14px;
+
+    background: rgba(255,255,255,.04);
+
+    border: 1px solid rgba(255,255,255,.06);
+
+}
+
+
+/* ==========================================
+   Logo Image
+========================================== */
+
+.logo-icon img {
+
+    width: 55px;
+
+    height: 55px;
+
+    object-fit: contain;
+
+}
+
+
+/* ==========================================
+   Logo Text
+========================================== */
+
+.logo-text {
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+}
+
+
+/* ==================================================
+   End of Sidebar Logo
+================================================== */

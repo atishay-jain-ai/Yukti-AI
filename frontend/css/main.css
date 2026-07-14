@@ -1,11 +1,79 @@
-@import url("variables.css");
-@import url("base.css");
-@import url("layout.css");
-@import url("sidebar.css");
-@import url("topbar.css");
-@import url("hero.css");
-@import url("prompt.css");
-@import url("chat.css");
-@import url("cards.css");
-@import url("animations.css");
-@import url("responsive.css");
+/* ==================================================
+   Yukti AI
+   Main Stylesheet
+================================================== */
+
+/* ================= Base ================= */
+
+@import url("base/variables.css");
+@import url("base/base.css");
+
+
+/* ================= Layout ================= */
+
+@import url("layout/layout.css");
+@import url("layout/content-wrapper.css");
+
+
+
+/* ================= Sidebar ================= */
+
+@import url("sidebar/sidebar.css");
+@import url("sidebar/sidebar-logo.css");
+@import url("sidebar/sidebar-nav.css");
+@import url("sidebar/sidebar-history.css");
+@import url("sidebar/developer-card.css");
+@import url("sidebar/sidebar-scrollbar.css");
+@import url("sidebar/sidebar-context-menu.css");
+@import url("sidebar/sidebar-modal.css");
+
+
+/* ================= Topbar ================= */
+
+@import url("topbar/topbar.css");
+@import url("topbar/topbar-title.css");
+
+
+
+/* ================= Hero ================= */
+
+
+@import url("hero/hero.css");
+@import url("hero/hero-logo.css");
+@import url("hero/hero-title.css");
+@import url("hero/hero-badge.css");
+@import url("hero/hero-description.css");
+@import url("hero/hero-background.css");
+
+
+/* ================= Cards ================= */
+
+@import url("cards/cards.css");
+@import url("cards/cards-content.css");
+
+
+/* ================= Chat ================= */
+
+@import url("chat/chat.css");
+@import url("chat/chat-message.css");
+@import url("chat/chat-stream.css");
+@import url("chat/chat-popup.css");
+@import url("chat/chat-toolbar.css");
+@import url("chat/chat-code.css");
+@import url("chat/chat-header.css");
+@import url("chat/chat-search.css");
+@import url("chat/chat-empty.css");
+
+/* ================= Prompt ================= */
+
+@import url("prompt/prompt.css");
+@import url("prompt/prompt-textarea.css");
+@import url("prompt/prompt-toolbar.css");
+@import url("prompt/prompt-send.css");
+@import url("prompt/prompt-warning.css");
+@import url("prompt/prompt-waves.css");
+
+
+/* ================= Animations ================= */
+
+@import url("animations/animations.css");

@@ -1,0 +1,234 @@
+/* =========================================================
+   Yukti AI — Bottom Waves
+========================================================= */
+
+
+/* ================= Waves Layout ================= */
+
+.bottom-waves {
+
+    position: fixed;
+
+    left: 280px;
+    right: 0;
+    bottom: 100px;
+
+    height: 230px;
+
+    overflow: hidden;
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 10;
+
+    filter:
+        drop-shadow(
+            0 0 22px
+            rgba(108, 99, 255, 0.24)
+        );
+
+}
+
+
+/* ================= Common Wave Style ================= */
+
+.wave-back,
+.wave-middle,
+.wave-front {
+
+    position: absolute;
+
+    left: -15%;
+
+    width: 130%;
+    height: 240px;
+
+    pointer-events: none;
+    user-select: none;
+
+    will-change: transform;
+
+}
+
+
+/* ================= Back Wave ================= */
+
+.wave-back {
+
+    bottom: 45px;
+
+    opacity: 0.34;
+
+    animation:
+        backWaveFlow
+        16s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ================= Middle Wave ================= */
+
+.wave-middle {
+
+    bottom: 18px;
+
+    opacity: 0.56;
+
+    animation:
+        middleWaveFlow
+        12s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ================= Front Wave ================= */
+
+.wave-front {
+
+    bottom: 0;
+
+    opacity: 0.82;
+
+    animation:
+        frontWaveFlow
+        9s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ================= Back Wave Animation ================= */
+
+@keyframes backWaveFlow {
+
+    from {
+        transform:
+            translateX(-70px);
+    }
+
+    to {
+        transform:
+            translateX(70px);
+    }
+
+}
+
+
+/* ================= Middle Wave Animation ================= */
+
+@keyframes middleWaveFlow {
+
+    from {
+        transform:
+            translateX(80px);
+    }
+
+    to {
+        transform:
+            translateX(-80px);
+    }
+
+}
+
+
+/* ================= Front Wave Animation ================= */
+
+@keyframes frontWaveFlow {
+
+    from {
+        transform:
+            translateX(-95px);
+    }
+
+    to {
+        transform:
+            translateX(95px);
+    }
+
+}
+
+
+/* ================= Content Layer ================= */
+
+.feature-grid,
+.chat-page,
+.chat-container,
+.message {
+
+    position: relative;
+
+    z-index: 20;
+
+}
+
+
+/* ================= Message Layer ================= */
+
+.bubble {
+
+    position: relative;
+
+    z-index: 21;
+
+}
+
+
+/* ================= Prompt Layer ================= */
+
+.prompt-section {
+
+    position: fixed;
+
+    z-index: 100;
+
+}
+
+
+/* ================= Responsive Waves ================= */
+
+@media (max-width: 900px) {
+
+    .bottom-waves {
+
+        left: 0;
+        bottom: 105px;
+
+        height: 210px;
+
+    }
+
+    .wave-back,
+    .wave-middle,
+    .wave-front {
+
+        left: -25%;
+
+        width: 150%;
+
+    }
+
+}
+
+
+/* ================= Reduced Motion ================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wave-back,
+    .wave-middle,
+    .wave-front {
+
+        animation: none;
+
+    }
+
+}

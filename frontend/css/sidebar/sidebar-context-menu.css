@@ -1,0 +1,80 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Sidebar Context Menu
+   File      : sidebar-context-menu.css
+   Version   : 0.1
+
+   Description:
+   Right-click context menu for chat history.
+
+================================================== */
+
+
+/* ==========================================
+   Context Menu Container
+========================================== */
+
+.context-menu {
+
+    position: fixed;
+
+    display: none;
+
+    flex-direction: column;
+
+    background: #181F2F;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 14px;
+
+    padding: 6px;
+
+    z-index: 99999;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+
+    animation: popup .18s;
+
+}
+
+
+/* ==========================================
+   Context Menu Buttons
+========================================== */
+
+.context-menu button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: none;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.context-menu button:hover {
+
+    background: rgba(255,255,255,.06);
+
+}
+
+
+/* ==================================================
+   End of Sidebar Context Menu
+================================================== */

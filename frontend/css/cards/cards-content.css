@@ -1,0 +1,83 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Feature Card Content
+   File      : cards-content.css
+================================================== */
+
+
+/* ==========================================
+   Feature Icon
+========================================== */
+
+.feature-icon{
+
+    font-size:30px;
+
+    color:#8B5CF6;
+
+    margin-bottom:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:2;
+
+    transition:
+        transform .35s ease,
+        color .35s ease;
+
+}
+
+
+/* ==========================================
+   Feature Icon Hover
+========================================== */
+
+.feature-card:hover .feature-icon{
+
+    transform:
+        translateY(-4px)
+        scale(1.15);
+
+    color:#B59BFF;
+
+    filter:
+        drop-shadow(0 0 12px rgba(108,99,255,.45));
+
+}
+
+
+/* ==========================================
+   Feature Title
+========================================== */
+
+.feature-card h3{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#FFFFFF;
+
+    z-index:2;
+
+}
+
+
+/* ==========================================
+   Feature Description
+========================================== */
+
+.feature-card p{
+
+    display:none;
+
+    z-index:2;
+
+}

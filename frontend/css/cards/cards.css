@@ -1,0 +1,135 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Feature Cards Layout
+   File      : cards.css
+================================================== */
+
+
+/* ==========================================
+   Feature Grid
+========================================== */
+
+.feature-grid{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+    margin-top:20px;
+
+    margin-bottom:40px;
+
+    position:relative;
+
+    z-index:20;
+
+}
+
+
+/* ==========================================
+   Feature Card Layout
+========================================== */
+
+.feature-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:165px;
+
+    height:95px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#161D2E;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    cursor:pointer;
+
+    z-index:2;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease,
+        background .35s ease;
+
+    backdrop-filter:blur(18px);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.22);
+
+    isolation:isolate;
+
+    will-change:transform;
+
+}
+
+
+/* ==========================================
+   Feature Card Hover
+========================================== */
+
+.feature-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    background:#1C253A;
+
+    border-color:rgba(108,99,255,.45);
+
+    box-shadow:
+        0 18px 45px rgba(108,99,255,.18);
+
+}
+
+
+/* ==========================================
+   Feature Card Overlay
+========================================== */
+
+.feature-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(108,99,255,.14),
+            transparent 65%
+        );
+
+    opacity:0;
+
+    transition:opacity .35s ease;
+
+}
+
+.feature-card:hover::before{
+
+    opacity:1;
+
+}

@@ -1,0 +1,130 @@
+/* ==================================================
+   Yukti AI
+
+   Component : Hero Background
+   File      : hero-background.css
+================================================== */
+
+
+/* ==========================================
+   Hero Background Glow
+========================================== */
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:650px;
+    height:650px;
+
+    top:-170px;
+
+    z-index:-1;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        rgba(108,99,255,.18),
+        rgba(108,99,255,.08),
+        transparent 72%
+    );
+
+    filter:blur(45px);
+
+}
+
+
+/* ==========================================
+   Hero Background
+========================================== */
+
+.hero-bg{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:-2;
+
+    background:
+        radial-gradient(
+            circle at 50% 28%,
+            rgba(108,99,255,.18),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #070B18 0%,
+            #0B1023 45%,
+            #10172D 100%
+        );
+
+}
+
+
+/* ==========================================
+   Hero Background Top Glow
+========================================== */
+
+.hero-bg::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-5%;
+
+    right:-5%;
+
+    bottom:-90px;
+
+    height:220px;
+
+    border-radius:50% 50% 0 0;
+
+    background:linear-gradient(
+        180deg,
+        rgba(108,99,255,.18),
+        rgba(108,99,255,.02)
+    );
+
+    filter:blur(10px);
+
+    opacity:.95;
+
+}
+
+
+/* ==========================================
+   Hero Background Bottom Glow
+========================================== */
+
+.hero-bg::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:-10%;
+
+    bottom:-120px;
+
+    width:120%;
+
+    height:260px;
+
+    background:radial-gradient(
+        ellipse at center,
+        rgba(139,92,246,.30) 0%,
+        rgba(108,99,255,.18) 35%,
+        transparent 75%
+    );
+
+    filter:blur(40px);
+
+    pointer-events:none;
+
+}
