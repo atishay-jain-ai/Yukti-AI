@@ -47,3 +47,16 @@ Yukti AI currently integrates AI services through providers such as **OpenRouter
 - VS Code
 
 ---
+
+## 📁 Project Structure
+
+Yukti AI follows a separated frontend and backend structure:
+
+├── backend/          # AI logic, API integration, and backend services
+├── frontend/         # User interface and client-side functionality
+├── .gitignore        # Files excluded from Git tracking
+├── LICENSE           # Project license
+├── README.md         # Project documentation
+└── requirements.txt  # Python dependencies
+
+---
