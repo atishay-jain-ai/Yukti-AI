@@ -156,3 +156,13 @@ Yukti AI is under active development. Planned improvements include:
 - [ ] Production deployment
 
 ---
+
+## 🖥️ Project Preview
+
+<p align="center">
+  <img src="yukti-ai-home.png" alt="Yukti AI Interface" width="100%">
+</p>
+
+> Yukti AI's current interface featuring AI chat, research, coding, document, image, and voice interaction options.
+
+---
