@@ -139,3 +139,20 @@ The FastAPI development server will start locally.
 
 ---
 
+## 🗺️ Roadmap
+
+Yukti AI is under active development. Planned improvements include:
+
+- [ ] React-based frontend
+- [ ] Retrieval-Augmented Generation (RAG)
+- [ ] Vector database integration
+- [ ] LangChain integration
+- [ ] AI agent capabilities
+- [ ] Conversation memory
+- [ ] Improved voice interaction
+- [ ] Image generation support
+- [ ] Docker containerization
+- [ ] User authentication
+- [ ] Production deployment
+
+---
