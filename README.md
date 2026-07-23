@@ -149,6 +149,28 @@ The FastAPI development server will start locally.
 
 ---
 
+### 6. Start the Frontend
+
+Open the project in VS Code.
+
+Navigate to:
+
+```text
+frontend/index.html
+```
+
+Right-click `index.html` and select:
+
+```text
+Open with Live Server
+```
+
+The Yukti AI interface will open in your browser.
+
+> Make sure the FastAPI backend is already running before using AI features.
+
+---
+
 ## 🗺️ Roadmap
 
 Yukti AI is under active development. Planned improvements include:
