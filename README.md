@@ -1,2 +1,2 @@
 # Yukti-AI
-An Intelligent AI Voice Assistant powered by Gemini API.
+A multi-model AI assistant built for intelligent, fast, and seamless conversations.
