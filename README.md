@@ -24,3 +24,26 @@ Yukti AI currently integrates AI services through providers such as **OpenRouter
 - 🔧 Separate frontend and backend architecture
 
 ---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Python
+
+### AI & APIs
+- OpenRouter API
+- Google Gemini API
+- Large Language Models (LLMs)
+- Prompt Engineering
+
+### Development Tools
+- Git
+- GitHub
+- VS Code
+
+---
