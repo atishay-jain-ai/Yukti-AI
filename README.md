@@ -34,10 +34,15 @@ Yukti AI currently integrates AI services through providers such as **OpenRouter
 
 ### Backend
 - Python
+- FastAPI
+- Uvicorn
 
 ### AI & APIs
 - OpenRouter API
 - Google Gemini API
+- Groq API
+- OpenAI API (Fallback Support)
+- Tavily API
 - Large Language Models (LLMs)
 - Prompt Engineering
 
@@ -101,4 +106,36 @@ Install all required Python packages using:
 ```bash
 pip install -r requirements.txt
 ```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the project root.
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
+OPENROUTER_API_KEY=your_openrouter_api_key
+TAVILY_API_KEY=your_tavily_api_key
+
+OPENAI_API_KEY=your_openai_api_key
+ENABLE_OPENAI_FALLBACK=false
+
+APP_NAME=Yukti AI
+APP_ENVIRONMENT=development
+DEBUG=true
+```
+
+> Never commit your `.env` file or API keys to GitHub.
+
+### 5. Start the Backend
+
+From the project root, run:
+
+```bash
+uvicorn backend.main:app --reload
+```
+
+The FastAPI development server will start locally.
+
+---
 
