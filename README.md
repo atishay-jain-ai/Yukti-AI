@@ -55,14 +55,24 @@ Yukti AI integrates multiple AI providers including OpenRouter, Google Gemini, a
 
 ## 📁 Project Structure
 
-Yukti AI follows a separated frontend and backend structure:
+Yukti AI follows a modular frontend and backend architecture:
 
-├── backend/          # AI logic, API integration, and backend services
+```text
+Yukti-AI/
+├── backend/
+│   ├── brain/        # Core AI orchestration and logic
+│   ├── config/       # Application and model configuration
+│   ├── models/       # Data and application models
+│   ├── providers/    # AI provider integrations
+│   ├── tools/        # AI tools and supporting functionality
+│   └── main.py       # FastAPI application entry point
+│
 ├── frontend/         # User interface and client-side functionality
-├── .gitignore        # Files excluded from Git tracking
-├── LICENSE           # Project license
-├── README.md         # Project documentation
-└── requirements.txt  # Python dependencies
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
 
 ---
 
