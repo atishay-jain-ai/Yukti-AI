@@ -60,3 +60,45 @@ Yukti AI follows a separated frontend and backend structure:
 └── requirements.txt  # Python dependencies
 
 ---
+
+## ⚙️ Installation & Setup
+
+Follow these steps to run Yukti AI locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/atishay-jain-ai/Yukti-AI.git
+cd Yukti-AI
+python -m venv venv
+
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate the virtual environment:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+Install all required Python packages using:
+
+```bash
+pip install -r requirements.txt
+```
+
