@@ -166,3 +166,49 @@ Yukti AI is under active development. Planned improvements include:
 > Yukti AI's current interface featuring AI chat, research, coding, document, image, and voice interaction options.
 
 ---
+
+## 🚀 Usage
+
+Once the backend and frontend are running, Yukti AI can be used for:
+
+- General AI conversations
+- Coding assistance
+- Research-oriented queries
+- Image-related interactions
+- Document-based workflows
+- Voice-based interaction
+- Multi-provider AI responses
+
+> Some features may still be under active development or experimental.
+
+---
+
+## 🤝 Contributing
+
+Yukti AI is currently an actively developing personal AI project.
+
+Suggestions, feedback, and future contributions are welcome as the project evolves.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Atishay Jain**
+
+AI & ML Student • Creator of Yukti AI • Full-Stack Developer
+
+[LinkedIn](https://www.linkedin.com/in/atishay-jain-ai/) • [GitHub](https://github.com/atishay-jain-ai)
+
+---
+
+### Yukti AI
+
+**Learning • Building • Innovating**
