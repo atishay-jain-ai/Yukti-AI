@@ -186,8 +186,8 @@ Yukti AI is under active development. Planned improvements include:
 - [ ] Improved voice interaction
 - [ ] Image generation support
 - [ ] Docker containerization
-- [ ] User authentication
-- [ ] Production deployment
+- [x] User authentication
+- [x] Production deployment
 
 ---
 
