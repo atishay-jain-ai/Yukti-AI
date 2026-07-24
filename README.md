@@ -85,7 +85,6 @@ Follow these steps to run Yukti AI locally.
 ```bash
 git clone https://github.com/atishay-jain-ai/Yukti-AI.git
 cd Yukti-AI
-python -m venv venv
 
 ```
 
